@@ -28,7 +28,14 @@ class OpenAIService {
       throw new Error(`OpenAI API Error: ${response.status} - ${error}`);
     }
 
-    return response.json();
+    const jsonResponse = await response.json();
+    
+    // Log de volledige response voor debugging
+    console.log(`=== OpenAI API Response voor ${endpoint} ===`);
+    console.log(JSON.stringify(jsonResponse, null, 2));
+    console.log('=== Einde Response ===');
+    
+    return jsonResponse;
   }
 
   async createThread(): Promise<string> {
